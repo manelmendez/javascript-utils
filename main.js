@@ -60,3 +60,39 @@ const isPalindrome = (str) => {
 }
 const f = isPalindrome('Do geese see God') //ej: reconocer
 console.log(f)
+
+//USAR CALLBACK ENTRE 2 funciones
+// una funcion suma numeros segun unos limites
+// la otra se encarga de comprobar si ya se ha hecho esa suma antes y devuelve un valor
+// si no se ha hecho, se hace la operacion y se guarda gracias al callback
+
+const memorizar = (callback) => {
+  let results = {}
+  return function (arg1, arg2) {
+    if (!results[arg2-arg1]) {
+      results[arg2-arg1] = callback(arg1,arg2)
+    }
+    return results[arg2-arg1]
+  }
+}
+
+const sumNumbers = memorizar((inicial, limit) => {
+  let sum = 0
+  for (let i = 0; i < limit; i++) {
+    sum += i
+  }
+  return sum
+})
+
+// la segunda y 3a llamada tardan menos
+console.time('sum')
+console.log(sumNumbers(2,100000))
+console.timeEnd('sum')
+
+console.time('sum')
+console.log(sumNumbers(2,100000))
+console.timeEnd('sum')
+
+console.time('sum')
+console.log(sumNumbers(2,100000))
+console.timeEnd('sum')
