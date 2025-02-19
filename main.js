@@ -96,3 +96,117 @@ console.timeEnd('sum')
 console.time('sum')
 console.log(sumNumbers(2,100000))
 console.timeEnd('sum')
+
+// Create a function `isAnagram` that takes 2 strings as input and returns TRUE if
+// the 2 strings are an anagram of eachother, false otherwise.
+
+// An angram is a string formed by rearranging the characters of another string.
+// Example: spar, formed from rasp.
+
+// mi solucion de recorrer no es mala
+function isAnagram(input1, input2) {
+  // Yout function body here.
+  const a = count(input1)
+  const b = count(input2)
+  for (const [key, value] of Object.entries(a)) {
+    let found = false
+    for (const [key2, value2] of Object.entries(b)) {
+      if (found) {
+        break
+      }
+      else if (key === key2) {
+        found = true
+        const equals = value === value2
+        if (!equals) {
+          return false
+        }
+      }
+    }
+  }
+  return true
+}
+
+const count = (input) => {
+  const inputSplit = input.split('')
+  let inputCount = {}
+  for (const letter of inputSplit) {
+    if (inputCount[letter]) {
+      inputCount[letter]++
+    } else {
+      inputCount[letter] = 1
+    }
+  }
+  return inputCount
+}
+
+
+
+// usando array reduce
+
+function isAnagram2(input1, input2) {
+  const a = repeatedLetters(input1)
+  const b = repeatedLetters(input2)
+  for (const [key, value] of Object.entries(a)) {
+    let found = false
+    for (const [key2, value2] of Object.entries(b)) {
+      if (found) {
+        break
+      }
+      else if (key === key2) {
+        found = true
+        const equals = value === value2
+        if (!equals) {
+          return false
+        }
+      }
+    }
+  }
+  return true
+}
+
+const repeatedLetters = str => {
+  const input1Split = str.split('')
+  const reduced = input1Split.reduce((acc, el) => {
+    if (acc[el]) {
+      acc[el]++
+    } else {
+      acc[el] = 1
+    }
+    return acc
+  }, {})
+  return reduced
+  // return Object.entries(reduced).reduce((acc, el) => acc[1] > el[1] ? acc : el)
+}
+
+// otras soluciones
+// ordenando los strings y ver si son iguales
+// esta es mas elegante
+// separa el string en un array, lo ordena y lo vuelve a unir
+// y luego compara los strings
+const isAnagram3 = (input1, input2) => {
+  const a = input1.split('').sort().join('')
+  console.log(a)
+  const b = input2.split('').sort().join('')
+  console.log(b)
+  return a === b
+}
+
+
+console.time('1')
+// Should output TRUE
+console.log(isAnagram("the detectives", "detect thieves"));
+// Should output FALSE
+console.log(isAnagram("javascript", "typescript"));
+console.timeEnd('1')
+
+
+console.time('2')
+console.log(isAnagram("the detectives", "detect thieves"));
+console.log(isAnagram("javascript", "typescript"));
+console.timeEnd('2')
+
+console.time('3')
+console.log(isAnagram("the detectives", "detect thieves"));
+console.log(isAnagram("javascript", "typescript"));
+console.timeEnd('3')
+
