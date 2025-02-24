@@ -201,12 +201,12 @@ console.timeEnd('1')
 
 
 console.time('2')
-console.log(isAnagram("the detectives", "detect thieves"));
-console.log(isAnagram("javascript", "typescript"));
+console.log(isAnagram2("the detectives", "detect thieves"));
+console.log(isAnagram2("javascript", "typescript"));
 console.timeEnd('2')
 
 console.time('3')
-console.log(isAnagram("the detectives", "detect thieves"));
-console.log(isAnagram("javascript", "typescript"));
+console.log(isAnagram3("the detectives", "detect thieves"));
+console.log(isAnagram3("javascript", "typescript"));
 console.timeEnd('3')
 
